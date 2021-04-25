@@ -17,11 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-
-from blog import views
+from backend.blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('blog/', include('blog.urls', namespace='blog')),
+    path('blog/', include('backend.blog.urls', namespace='blog')),
     path('api/666', view=lambda request: HttpResponse('戏说不是胡说')),
 ]
