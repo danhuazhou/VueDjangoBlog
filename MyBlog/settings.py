@@ -24,8 +24,9 @@ SECRET_KEY = 'django-insecure-j#nv3jusq23spv!$7xhpo+)u((*gx0*_4jq7g436f7agaxljqc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+# 替换系统自带User model
+AuTH_USER_MODEL = 'MyBlog.backend.accounts.BlogUser'
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'rest_framework',
     'mdeditor',
     'backend.blog',
     'backend.accounts',
@@ -126,3 +128,15 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.BlogUser'
+
+# rest框架设置
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+        # 'rest_framework.permissions.',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+SITE_ID = 1

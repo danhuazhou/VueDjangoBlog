@@ -18,9 +18,22 @@ from django.urls import path, include
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from backend.blog import views
+from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
+from rest_framework.documentation import include_docs_urls
+from backend.blog.views import BlogListViewSet
+
+router = DefaultRouter()
+
+router.register(r'blogs', BlogListViewSet, basename='blogs')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^', include(router.urls)),
+    url(r'docs/', include_docs_urls(title="my_blog")),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('blog/', include('backend.blog.urls', namespace='blog')),
     path('api/666', view=lambda request: HttpResponse('戏说不是胡说')),
+    path('accounts/', include('backend.accounts.urls', namespace='accounts')),
+
 ]
