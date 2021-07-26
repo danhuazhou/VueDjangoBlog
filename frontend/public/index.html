@@ -1,17 +1,82 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+
+    <!-- 第三方CDN加载CSS -->
+    <link href="./../src/assets/style/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- 本地css静态资源 -->
+
+    <link rel="stylesheet" href="./../src/assets/style/function.min.css" type="text/css"/>
+    <link rel="stylesheet"
+          href="./../src/assets/style/handsome.min.css"
+          type="text/css"/>
+
+
+    <!--主题组件css文件加载-->
+
+    <!--引入英文字体文件-->
+    <link rel="stylesheet preload" href="./../src/assets/style/font.min.css" as="style"/>
+
+    <style type="text/css">
+
+        html.bg {
+            background: #EFEFEF
+        }
+
+        .cool-transparent .off-screen + #content {
+            background: #EFEFEF
+        }
+
+        @media (max-width: 767px) {
+            html.bg {
+                background: #EFEFEF
+            }
+
+            .cool-transparent .off-screen + #content {
+                background: #EFEFEF
+            }
+        }
+
+        figcaption.post-img-figcaption:not(.post-img-figcation) {
+            display: none;
+        }
+
+        @media screen and (max-width: 370px) {
+            .album-thumb {
+                width: 100%;
+            }
+        }
+
+        #aside .wrapper:hover {
+            background: url(static/images/snow.gif);
+            background-size: cover;
+            color: #999;
+        }    </style>
+
+    <!--全站jquery-->
+    <script src="static/js/jquery.min.js"></script>
+
+    <!--网站统计代码-->
+
+
+</head>
+<body id="body" class="fix-padding skt-loading">
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
+<style>
+    @import "./../src/assets/style/bootstrap.min.css";
+</style>
 </html>

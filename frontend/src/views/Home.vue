@@ -8,10 +8,12 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+// import Header from '@/components/layout/pc/header'
 
 @Options({
   components: {
-    HelloWorld
+    HelloWorld,
+    // Header
   }
 })
 export default class Home extends Vue {}

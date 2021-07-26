@@ -136,7 +136,8 @@ class Article(BaseModel):
 class Category(BaseModel):
     """文章分类"""
     name = models.CharField('分类名', max_length=30, unique=True)
-    parent_category = models.ForeignKey('self', verbose_name="父级分类", blank=True, null=True, on_delete=models.CASCADE)
+    parent_category = models.ForeignKey('self', verbose_name="父级分类", blank=True, null=True, on_delete=models.CASCADE,
+                                        related_name="sub_category")
     slug = models.SlugField(default='no-slug', max_length=60, blank=True)
 
     class Meta:

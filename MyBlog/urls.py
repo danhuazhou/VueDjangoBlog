@@ -29,7 +29,7 @@ router.register(r'blogs', BlogListViewSet, basename='blogs')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
+    url(r'api/', include(router.urls)),
     url(r'docs/', include_docs_urls(title="my_blog")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('blog/', include('backend.blog.urls', namespace='blog')),
