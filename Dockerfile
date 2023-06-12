@@ -1,4 +1,4 @@
-FROM python:3.8.10-alpine
+FROM python:3.8.10
 
 MAINTAINER "danhuazhou"
 
@@ -7,6 +7,8 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /www
 
 COPY ./requirements.txt /tmp/requirements.txt
+
+# RUN apk update && apk add gcc
 
 RUN pip install -r /tmp/requirements.txt -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com \
     && pip install uwsgi -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com  \
