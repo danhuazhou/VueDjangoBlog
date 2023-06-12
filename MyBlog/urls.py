@@ -22,10 +22,13 @@ from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.documentation import include_docs_urls
 from backend.blog.views import BlogListViewSet
+from backend.comments.views import CommentsViewSet
 
 router = DefaultRouter()
 
 router.register(r'blogs', BlogListViewSet, basename='blogs')
+
+router.register(r'comments', CommentsViewSet, basename='comments')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
