@@ -59,12 +59,13 @@ class Article(BaseModel):
         ('a', '文章'),
         ('p', '页面'),
     )
-    title = models.CharField('标题', max_length=200, unique=True)
+    title = models.CharField('标题', max_length=200)
     body = MDTextField('正文')
     publish_time = models.DateTimeField('发布时间', blank=False, null=False, default=now)
     status = models.CharField('文章状态', max_length=2, choices=STATUS_CHOICES, default=PUBLISH)
     comment_status = models.CharField('评论状态', max_length=2, choices=COMMENT_STATUS, default=OPEN)
     type = models.CharField('类型', max_length=1, choices=TYPE, default='a')
+
     views = models.PositiveIntegerField('浏览量', default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', blank=False, null=False,
                                on_delete=models.CASCADE)

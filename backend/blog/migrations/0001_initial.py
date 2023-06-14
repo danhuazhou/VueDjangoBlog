@@ -113,7 +113,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('created_time', models.DateTimeField(default=django.utils.timezone.now, verbose_name='创建时间')),
                 ('last_mod_time', models.DateTimeField(default=django.utils.timezone.now, verbose_name='修改时间')),
-                ('title', models.CharField(max_length=200, unique=True, verbose_name='标题')),
+                ('title', models.CharField(max_length=200, verbose_name='标题')),
                 ('body', mdeditor.fields.MDTextField(verbose_name='正文')),
                 ('publish_time', models.DateTimeField(default=django.utils.timezone.now, verbose_name='发布时间')),
                 ('status', models.CharField(choices=[('DR', '草稿'), ('PU', '发表')], default='PU', max_length=2, verbose_name='文章状态')),
