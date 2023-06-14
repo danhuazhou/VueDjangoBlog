@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+import configparser
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'backend.accounts',
     'backend.comments',
     'backend.oauth',
+    'backend.problems',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +82,22 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+config = configparser.ConfigParser()
+config.read(os.path.join(BASE_DIR,'config.ini'))
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config.get('mysql', 'name'),
+        'USER': config.get('mysql', 'user'),
+        'PASSWORD': config.get('mysql', 'password'),
+        'HOST': config.get('mysql', 'host'),
+        'PORT': config.get('mysql', 'port'),
     }
 }
 
