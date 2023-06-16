@@ -49,6 +49,7 @@ class Problems(BaseModel):
         verbose_name = "文章"
         verbose_name_plural = verbose_name
         get_latest_by = 'id'
+        db_table = 'problems_problems'
 
 
 class Tag(BaseModel):
@@ -63,6 +64,7 @@ class Tag(BaseModel):
         ordering = ['name']
         verbose_name = "标签"
         verbose_name_plural = verbose_name
+        db_table = 'problems_tag'
 
 
 class Category(BaseModel):
@@ -78,6 +80,7 @@ class Category(BaseModel):
         ordering = ['name']
         verbose_name = "分类"
         verbose_name_plural = verbose_name
+        db_table = 'problems_category'
 
     def __str__(self):
         return self.name

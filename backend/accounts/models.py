@@ -16,12 +16,23 @@ class BlogUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
     def get_absolute_url(self):
-        return reverse('blog:author_detail', kwargs={'author_name': self.username})
+        return reverse('blog:author_detail',
+                       kwargs={'author_name': self.username})
+
     def get_full_url(self):
         site = get_current_site().domain
-        url = "https://{site}{path}".format(site=site, path=self.get_absolute_url())
+        url = "https://{site}{path}".format(site=site,
+                                            path=self.get_absolute_url())
         return url
+
+    class Meta:
+        ordering = ('-username', '-date_joined',)
+        verbose_name = "用户"
+        verbose_name_plural = verbose_name
+        get_latest_by = 'id'
+        db_table = 'accounts_users'
 # class BlogUserViewSet(viewsets.ModelViewSet):
 #     """
 #     pass

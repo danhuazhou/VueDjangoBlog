@@ -84,6 +84,7 @@ class Article(BaseModel):
         verbose_name = "文章"
         verbose_name_plural = verbose_name
         get_latest_by = 'id'
+        db_table = 'blog_article'
 
     def get_absolute_url(self):
         return reverse('blog:detailbyid', kwargs={
@@ -145,7 +146,7 @@ class Category(BaseModel):
         ordering = ['name']
         verbose_name = "分类"
         verbose_name_plural = verbose_name
-
+        db_table = 'blog_category'
     def get_absolute_url(self):
         return reverse('blog:category_detail', kwargs={'category_name': self.slug})
 
@@ -209,7 +210,7 @@ class Tag(BaseModel):
         ordering = ['name']
         verbose_name = "标签"
         verbose_name_plural = verbose_name
-
+        db_table = 'blog_tag'
 
 class Links(models.Model):
     """友情链接"""
@@ -226,7 +227,7 @@ class Links(models.Model):
         ordering = ['sequence']
         verbose_name = '友情链接'
         verbose_name_plural = verbose_name
-
+        db_table = 'blog_links'
     def __str__(self):
         return self.name
 
@@ -244,7 +245,7 @@ class SideBar(models.Model):
         ordering = ['sequence']
         verbose_name = '侧边栏'
         verbose_name_plural = verbose_name
-
+        db_table = 'blog_sidebar'
     def __str__(self):
         return self.name
 
@@ -270,7 +271,7 @@ class BlogSettings(models.Model):
     class Meta:
         verbose_name = '网站配置'
         verbose_name_plural = verbose_name
-
+        db_table = 'blog_settings'
     def __str__(self):
         return self.sitename
 
