@@ -21,22 +21,28 @@ from backend.blog import views
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
+
 from backend.blog.views import BlogListViewSet
 from backend.comments.views import CommentsViewSet
-
+from backend.problems.views import ProblemsViewSet, api_root
 router = DefaultRouter()
 
 router.register(r'blogs', BlogListViewSet, basename='blogs')
 
 router.register(r'comments', CommentsViewSet, basename='comments')
-
+router.register(r'problems', ProblemsViewSet, basename='problems')
+# schemas_view = get_schema_view(title='test')
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('schema/',schemas_view),
+    path('', api_root),
     url(r'api/', include(router.urls)),
     url(r'docs/', include_docs_urls(title="my_blog")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('blog/', include('backend.blog.urls', namespace='blog')),
-    path('api/666', view=lambda request: HttpResponse('戏说不是胡说')),
+    path('api/666', view=lambda request: HttpResponse('戏说不是胡说'), name='test'),
     path('accounts/', include('backend.accounts.urls', namespace='accounts')),
+    url(r'api/', include('backend.problems.urls', namespace='problems')),
 
 ]
