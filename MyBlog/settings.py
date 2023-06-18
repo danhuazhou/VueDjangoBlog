@@ -220,7 +220,7 @@ LOGGING = {
     # logging.getLogger(__name__)中没有被name匹配的记录器会流转到根记录器
     'root': {
         'level': 'INFO',
-        'handlers': ['console', 'log_file'],
+        'handlers': ['console', 'backend'],
     },
     # 定义日志格式
     'formatters': {
