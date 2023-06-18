@@ -207,3 +207,109 @@ MDEDITOR_CONFIGS = {
         'toolbar': ["undo", "redo"]
     }
 }
+
+# LOG_DIR = os.path.join(BASE_DIR, "logs")
+LOG_DIR = '/www/wwwlogs/blog_log'
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    # 根记录器，配置等同普通记录器，但是没有propagate配置项,
+    # logging.getLogger(__name__)中没有被name匹配的记录器会流转到根记录器
+    'root': {
+        'level': 'INFO',
+        'handlers': ['console', 'log_file'],
+    },
+    # 定义日志格式
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s %(process)s [%(name)s.%(funcName)s:%(lineno)d %(module)s] %(message)s',
+        },
+        'simple': {  # 简单
+            'format': '[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s'
+        },
+    },
+    # 过滤
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    # 日志处理方式
+    'handlers': {
+        'backend': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'backend.log'),
+            'maxBytes': 16777216,  # 16 MB
+            'formatter': 'verbose',
+            'backupCount': 2,
+        },
+        'blog': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'blog.log'),
+            'maxBytes': 16777216,  # 16 MB
+            'formatter': 'verbose',
+            'backupCount': 2,
+        },
+        'problems': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'problems.log'),
+            'maxBytes': 16777216,  # 16 MB
+            'formatter': 'verbose',
+            'backupCount': 2,
+        },
+        'request_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'django_request.log'),
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 2,
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    # 日志记录器
+    'loggers': {
+        'backend': {
+            'handlers': ['backend'],
+            'level': 'INFO',
+            'propagate': False,  # 向不向更高级别的logger传递
+        },
+        'backend.blog': {
+            'handlers': ['blog'],
+            'level': 'INFO',
+            'propagate': False,  # 向不向更高级别的logger传递
+        },
+        'backend.problems': {
+            'handlers': ['problems'],
+            'level': 'INFO',
+            'propagate': False,  # 向不向更高级别的logger传递
+        },
+        'django.request': {
+            'handlers': ['request_handler'],
+            'level': 'INFO',
+            'propagate': False,
+        }
+    }
+}
