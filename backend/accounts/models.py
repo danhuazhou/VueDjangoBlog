@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
 from django.urls import reverse
+import uuid
 from MyBlog.utils import get_current_site
 from rest_framework import viewsets
 
@@ -13,6 +14,7 @@ class BlogUser(AbstractUser):
     created_time = models.DateTimeField('创建时间', default=now)
     last_mod_time = models.DateTimeField('最后修改', default=now)
     source = models.CharField('来源', max_length=100, blank=True)
+    uid = models.UUIDField('身份标识', default=uuid.uuid4, editable=False, unique=True)
 
     def __str__(self):
         return self.username
