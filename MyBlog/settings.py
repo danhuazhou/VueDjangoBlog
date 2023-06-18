@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 import configparser
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -89,7 +90,7 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 #     }
 # }
 config = configparser.ConfigParser()
-config.read(os.path.join(BASE_DIR,'config.ini'))
+config.read(os.path.join(BASE_DIR, 'config.ini'))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -164,3 +165,45 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
 )
 CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/media/'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+MDEDITOR_CONFIGS = {
+    'default': {
+        'width': '90%',
+        'height': 500,
+        'toolbar': ["undo", "redo", "|",
+                    "bold", "del", "italic", "quote", "ucwords", "uppercase",
+                    "lowercase", "|",
+                    "h1", "h2", "h3", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "link", "reference-link", "image", "code",
+                    "preformatted-text", "code-block", "table", "datetime",
+                    "emoji", "html-entities", "pagebreak", "goto-line", "|",
+                    "help", "info",
+                    "||", "preview", "watch", "fullscreen"],
+        'upload_image_formats': ["jpg", "JPG", "jpeg", "JPEG", "gif", "GIF",
+                                 "png", "PNG", "bmp", "BMP", "webp", "WEBP"],
+        'image_folder': 'editor',
+        'theme': 'default',  # dark / default
+        'preview_theme': 'default',  # dark / default
+        'editor_theme': 'default',  # pastel-on-dark / default
+        'toolbar_autofixed': True,
+        'search_replace': True,
+        'emoji': True,
+        'tex': True,
+        'flow_chart': True,
+        'sequence': True,
+        'language': 'zh',  # zh / en
+        'watch': True,  # Live preview
+        'lineWrapping': False,  # lineWrapping
+        'lineNumbers': True,  # lineNumbers,
+        'placeholder': 'Enjoy!'
+    },
+    'custom': {
+        'width': '90%',
+        'height': 200,
+        'toolbar': ["undo", "redo"]
+    }
+}

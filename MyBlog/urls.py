@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path
 from django.http import HttpResponse
+from django.views.static import serve
+from MyBlog.settings import MEDIA_ROOT
 from django.views.generic.base import TemplateView
 from backend.blog import views
 from django.conf.urls import url, include
@@ -44,5 +46,7 @@ urlpatterns = [
     path('api/666', view=lambda request: HttpResponse('戏说不是胡说'), name='test'),
     path('accounts/', include('backend.accounts.urls', namespace='accounts')),
     url(r'api/', include('backend.problems.urls', namespace='problems')),
-
+    path('mdeditor/', include(('mdeditor.urls', 'mdeditor'), namespace='mdeditor')),  # 配置编辑器路由
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),  # 添加上传文件路径
 ]
+from mdeditor import urls
