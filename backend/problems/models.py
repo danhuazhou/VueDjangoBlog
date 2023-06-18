@@ -31,14 +31,16 @@ class Problems(BaseModel):
     difficulty = models.CharField('难度', max_length=2,
                                   choices=DIFFICULTY_CHOICES, default=EASY)
     category = models.ForeignKey('Category', verbose_name='分类',
-                                 on_delete=models.CASCADE, blank=False,
-                                 null=False)
+                                 on_delete=models.CASCADE, blank=True,
+                                 null=True)
     tags = models.ManyToManyField('Tag', verbose_name='标签集合', blank=True)
-    url = models.URLField('题目链接')
-    website = models.CharField('网站', max_length=50)
-    review_time = models.DateTimeField('复习时间')
-    successes = models.PositiveSmallIntegerField('成功次数')
-    failtures = models.PositiveSmallIntegerField('失败次数')
+    url = models.URLField('题目链接', null=True, blank=True)
+    website = models.CharField('网站', max_length=50, null=True, blank=True)
+    review_time = models.DateTimeField('复习时间', null=True, blank=True)
+    successes = models.PositiveSmallIntegerField('成功次数', null=True,
+                                                 blank=True)
+    failtures = models.PositiveSmallIntegerField('失败次数', null=True,
+                                                 blank=True)
     order = models.IntegerField('排序', blank=False, null=False, default=0)
 
     def __str__(self):
