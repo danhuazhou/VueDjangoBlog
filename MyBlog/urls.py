@@ -28,6 +28,7 @@ from rest_framework.schemas import get_schema_view
 from backend.blog.views import BlogListViewSet
 from backend.comments.views import CommentsViewSet
 from backend.problems.views import ProblemsViewSet, api_root
+from backend.problems.views import MdUploadView
 router = DefaultRouter()
 
 router.register(r'blogs', BlogListViewSet, basename='blogs')
@@ -46,7 +47,8 @@ urlpatterns = [
     path('api/666', view=lambda request: HttpResponse('戏说不是胡说'), name='test'),
     path('accounts/', include('backend.accounts.urls', namespace='accounts')),
     url(r'api/', include('backend.problems.urls', namespace='problems')),
-    path('mdeditor/', include(('mdeditor.urls', 'mdeditor'), namespace='mdeditor')),  # 配置编辑器路由
+    re_path('^mdeditor/uploads/$', MdUploadView.as_view()),  # 配置编辑器路由
+    # path('mdeditor/', include(('mdeditor.urls', 'mdeditor'), namespace='mdeditor')),  # 配置编辑器路由
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),  # 添加上传文件路径
 ]
 from mdeditor import urls
