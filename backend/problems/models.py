@@ -24,7 +24,7 @@ class Problems(BaseModel):
         (MEDIUM, '中等'),
         (HARD, '困难'),
     )
-    title = models.CharField('题目', max_length=200)
+    title = models.CharField('题目', max_length=190, unique=True)
     description = MDTextField('题目描述')
     solution = MDTextField('题解')
 
