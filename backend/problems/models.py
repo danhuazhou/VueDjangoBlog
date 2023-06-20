@@ -42,13 +42,14 @@ class Problems(BaseModel):
     failtures = models.PositiveSmallIntegerField('失败次数', null=True,
                                                  blank=True)
     order = models.IntegerField('排序', blank=False, null=False, default=0)
+    emphasis = models.IntegerField('重点', blank=True, null=True, default=1)
 
     def __str__(self):
         return self.title
 
     class Meta:
         ordering = ('-order', '-review_time',)
-        verbose_name = "文章"
+        verbose_name = "题库"
         verbose_name_plural = verbose_name
         get_latest_by = 'id'
         db_table = 'problems_problems'
