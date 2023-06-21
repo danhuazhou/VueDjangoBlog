@@ -6,7 +6,7 @@ from .models import Problems, Tag, Category
 # Register your models here.
 
 class ProblemsAdmin(admin.ModelAdmin):
-    list_display = ("title", "difficulty", "emphasis", "passing_rate", "redirect_url")
+    list_display = ("title", "difficulty_", "emphasis", "passing_rate", "redirect_url")
     search_fields = ("title",)
 
     def passing_rate(self, obj):
