@@ -1,11 +1,12 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Problems, Tag, Category
 
 
 # Register your models here.
 
 class ProblemsAdmin(admin.ModelAdmin):
-    list_display = ("title", "difficulty", "emphasis", "passing_rate", "url")
+    list_display = ("title", "difficulty", "emphasis", "passing_rate", "redirect_url")
     search_fields = ("title",)
 
     def passing_rate(self, obj):
@@ -16,6 +17,14 @@ class ProblemsAdmin(admin.ModelAdmin):
         else:
             return format(0, '.2%')
 
+    def redirect_url(self, obj):
+        if obj.url:
+            return format_html('<a href="{0}" target="_blank">题目链接</a>',
+                               obj.url)
+        else:
+            return '-'
+
+    redirect_url.short_description = '跳转链接'
     passing_rate.short_description = "通过率"
 
 
