@@ -10,7 +10,7 @@ class ProblemsAdmin(admin.ModelAdmin):
     "title", "difficulty_", "category", "emphasis", "passing_rate",
     "redirect_url")
     search_fields = ("title",)
-    list_filter = ("difficulty", "category")
+    list_filter = ("difficulty", "category", "website")
 
     def passing_rate(self, obj):
         s = int(obj.successes) if obj.successes else 0
