@@ -123,9 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -199,7 +199,12 @@ MDEDITOR_CONFIGS = {
         'watch': True,  # Live preview
         'lineWrapping': False,  # lineWrapping
         'lineNumbers': True,  # lineNumbers,
-        'placeholder': 'Enjoy!'
+        'placeholder': 'Enjoy!',
+        'editor_options': {
+            'markdown': {
+                'safeMode': False,  # 禁用安全模式，禁止转义特殊字符
+            }
+        },
     },
     'custom': {
         'width': '90%',
@@ -312,4 +317,14 @@ LOGGING = {
             'propagate': False,
         }
     }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # 后面数字可设定使用几号库
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+        }
+    },
 }

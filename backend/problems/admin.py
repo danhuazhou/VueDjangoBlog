@@ -7,10 +7,11 @@ from .models import Problems, Tag, Category
 
 class ProblemsAdmin(admin.ModelAdmin):
     list_display = (
-    "title", "difficulty_", "category", "emphasis", "passing_rate",
-    "redirect_url")
+        "title", "difficulty_", "category", "emphasis", "passing_rate",
+        "review_time", "redirect_url")
     search_fields = ("title",)
     list_filter = ("difficulty", "category", "website")
+    ordering = ('-id', '-review_time')
 
     def passing_rate(self, obj):
         s = int(obj.successes) if obj.successes else 0
