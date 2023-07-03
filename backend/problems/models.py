@@ -31,8 +31,8 @@ class Problems(BaseModel):
         (HARD, '#ff2d55'),
     )
     title = models.CharField('题目', max_length=190, unique=True)
-    description = MDTextField('题目描述')
-    solution = MDTextField('题解')
+    description = MDTextField('题目描述', null=True, blank=True)
+    solution = MDTextField('题解', null=True, blank=True)
 
     difficulty = models.CharField('难度', max_length=2,
                                   choices=DIFFICULTY_CHOICES, default=EASY)
