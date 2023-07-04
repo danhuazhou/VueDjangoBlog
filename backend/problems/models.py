@@ -49,16 +49,23 @@ class Problems(BaseModel):
                                                  blank=True)
     order = models.IntegerField('排序', blank=False, null=False, default=0)
     emphasis = models.IntegerField('重点', blank=True, null=True, default=1)
+    remark = models.TextField('备注', blank=True, null=True)
 
     def difficulty_(self):
-        color_code = [i[1] for i in self.DIFFICULTY_COLOUR if i[0] == self.difficulty][0]
-        difficulty = [i[1] for i in self.DIFFICULTY_CHOICES if i[0] == self.difficulty][0]
+        color_code = \
+            [i[1] for i in self.DIFFICULTY_COLOUR if i[0] == self.difficulty][
+                0]
+        difficulty = \
+            [i[1] for i in self.DIFFICULTY_CHOICES if i[0] == self.difficulty][
+                0]
         return format_html(
             '<span style="color: {};">{}</span>',
             color_code,
             difficulty
         )
+
     difficulty_.short_description = "难度"
+
     def __str__(self):
         return self.title
 
