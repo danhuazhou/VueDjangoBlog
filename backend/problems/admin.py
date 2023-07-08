@@ -32,10 +32,6 @@ class ProblemsAdmin(admin.ModelAdmin):
     redirect_url.short_description = '跳转链接'
     passing_rate.short_description = "通过率"
 
-    @cache_page(60 * 5)
-    def get_queryset(self, request):
-        return super().get_queryset(request)
-
 
 class ProblemsCategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "parent_category", "slug")
