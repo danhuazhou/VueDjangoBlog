@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import datetime
 import os
 from pathlib import Path
 import configparser
@@ -327,4 +328,11 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient'
         }
     },
+}
+
+JWT_AUTH = {
+    # 过期时间1天
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 自定义认证结果 返回个数默认只要token字段
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'backend.utils.jwt_response_handler.jwt_response_payload_handler',
 }

@@ -24,6 +24,7 @@ from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
+from rest_framework_jwt.views import obtain_jwt_token
 
 from backend.blog.views import BlogListViewSet
 from backend.comments.views import CommentsViewSet
@@ -38,6 +39,7 @@ router.register(r'problems', ProblemsViewSet, basename='problems')
 # schemas_view = get_schema_view(title='test')
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', obtain_jwt_token),
     # path('schema/',schemas_view),
     path('', api_root),
     url(r'api/', include(router.urls)),
